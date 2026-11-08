@@ -1,5 +1,7 @@
 """Minimal JSON-lines client for TiXL's local debug bridge."""
 
+from __future__ import annotations
+
 import contextlib
 import json
 import socket

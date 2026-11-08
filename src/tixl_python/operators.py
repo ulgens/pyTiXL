@@ -13,6 +13,8 @@ snake_case names (``ascii.filter_characters``) and map to the symbol's actual
 input names (``FilterCharacters``).
 """
 
+from __future__ import annotations
+
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, ClassVar
