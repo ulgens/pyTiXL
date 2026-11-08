@@ -16,6 +16,7 @@ from tixl_python import __version__
 from tixl_python.api.auth import require_token
 from tixl_python.api.bridge import TixlBridge
 from tixl_python.api.errors import ApiError
+from tixl_python.api.middleware import TIXL_RESPONSE_HEADERS, TixlMetadataMiddleware
 from tixl_python.api.routes import router
 from tixl_python.api.schemas import HealthResponse
 from tixl_python.api.settings import ApiSettings
@@ -71,6 +72,7 @@ def create_app(settings: ApiSettings | None = None) -> FastAPI:
     app.state.bridge = bridge
     app.state.captures_dir = captures_dir
 
+    app.add_middleware(TixlMetadataMiddleware)
     if settings.cors_origins:
         app.add_middleware(
             CORSMiddleware,
@@ -78,6 +80,7 @@ def create_app(settings: ApiSettings | None = None) -> FastAPI:
             allow_credentials=True,
             allow_methods=["*"],
             allow_headers=["*"],
+            expose_headers=list(TIXL_RESPONSE_HEADERS),
         )
 
     @app.exception_handler(ApiError)

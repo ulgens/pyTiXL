@@ -19,7 +19,6 @@ from tixl_python.api.schemas.capture import (
 from tixl_python.api.schemas.common import (
     ApiModel,
     EmptyResult,
-    Envelope,
     Int2,
     Rect,
     ResultModel,
@@ -114,7 +113,6 @@ __all__ = [
     "DeleteSelectionRequest",
     "DeleteSelectionResult",
     "EmptyResult",
-    "Envelope",
     "FocusGraphViewRequest",
     "FocusGraphViewResult",
     "GetAudioInputsResult",
