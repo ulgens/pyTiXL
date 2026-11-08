@@ -96,7 +96,7 @@ from tixl_python.api.schemas import (
 from tixl_python.client import TixlError
 from tixl_python.config import DEFAULT_PORT
 
-router = APIRouter(prefix="/api/v1")
+router = APIRouter(prefix="/api")
 
 
 def get_bridge(request: Request) -> TixlBridge:
@@ -659,7 +659,7 @@ async def list_methods() -> MethodsResponse:
             tag=spec.tag,
             summary=spec.summary,
             timeout_seconds=spec.timeout,
-            http_path=f"/api/v1/{spec.name}",
+            http_path=f"/api/{spec.name}",
         )
         for spec in METHODS_BY_NAME.values()
     ]
