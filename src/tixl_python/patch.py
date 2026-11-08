@@ -2,6 +2,8 @@
 Declarative patches for TiXL.
 """
 
+from __future__ import annotations
+
 import atexit
 import contextlib
 import copy

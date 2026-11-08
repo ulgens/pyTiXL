@@ -1,5 +1,7 @@
 """Project and window schemas."""
 
+from __future__ import annotations
+
 from uuid import UUID
 
 from pydantic import model_validator

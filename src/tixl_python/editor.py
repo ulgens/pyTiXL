@@ -1,5 +1,7 @@
 """Locating, launching, and owning the TiXL editor."""
 
+from __future__ import annotations
+
 import contextlib
 import logging
 import os
