@@ -126,10 +126,8 @@ async def _invoke(
     *,
     timeout: float | None = None,
 ) -> dict[str, Any]:
-    spec = METHODS_BY_NAME[method]
-
     try:
-        call = await bridge.call(method, _params(body), timeout or spec.timeout)
+        call = await bridge.call(method, _params(body), timeout)
     except TixlError as exc:
         raise from_tixl_error(exc) from exc
 
@@ -179,7 +177,7 @@ async def shutdown(bridge: BridgeDep) -> EmptyResult:
     summary="Symbol-structure version.",
 )
 async def get_structure_version(bridge: BridgeDep) -> GetStructureVersionResult:
-    return await _invoke(bridge, "getStructureVersion")
+    return await _invoke(bridge, "getStructureVersion", timeout=30.0)
 
 
 @router.post(
@@ -664,7 +662,6 @@ async def list_methods() -> MethodsResponse:
             name=spec.name,
             tag=spec.tag,
             summary=spec.summary,
-            timeout_seconds=spec.timeout,
             http_path=f"/api/{spec.name}",
         )
         for spec in METHODS_BY_NAME.values()
