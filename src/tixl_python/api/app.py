@@ -38,7 +38,7 @@ DESCRIPTION = """
 Typed HTTP facade over TiXL's local JSON-lines debug bridge.
 
 Start TiXL with `--debug-server 9042`, then launch this server and open `/docs`.
-Every protocol method has its own endpoint under `/api/v1`; request and response
+Every protocol method has its own endpoint under `/api`; request and response
 bodies use the editor's camelCase spelling while Python fields stay snake_case.
 """
 

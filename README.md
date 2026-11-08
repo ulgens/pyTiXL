@@ -217,17 +217,17 @@ uv sync --extra api
 tixl-api --tixl-port 9042            # http://127.0.0.1:8787/docs
 ```
 
-Every TiXL protocol method has its own endpoint under `/api/v1`, with Pydantic
+Every TiXL protocol method has its own endpoint under `/api`, with Pydantic
 request and response models:
 
 ```text
-POST /api/v1/getVersion
-POST /api/v1/getGraphState
-POST /api/v1/setInput
-POST /api/v1/addOp
-POST /api/v1/connect
-POST /api/v1/screenshot
-POST /api/v1/newProject
+POST /api/getVersion
+POST /api/getGraphState
+POST /api/setInput
+POST /api/addOp
+POST /api/connect
+POST /api/screenshot
+POST /api/newProject
 ...
 ```
 
@@ -235,17 +235,17 @@ Request and response bodies use TiXL's camelCase spelling. Python fields stay
 snake_case, and Swagger shows both the schema and examples.
 
 ```bash
-curl -s -X POST http://127.0.0.1:8787/api/v1/getVersion
-curl -s -X POST http://127.0.0.1:8787/api/v1/getGraphState \
+curl -s -X POST http://127.0.0.1:8787/api/getVersion
+curl -s -X POST http://127.0.0.1:8787/api/getGraphState \
   -H 'content-type: application/json' -d '{"includeDefaults": true}'
-curl -s -X POST http://127.0.0.1:8787/api/v1/setInput \
+curl -s -X POST http://127.0.0.1:8787/api/setInput \
   -H 'content-type: application/json' \
   -d '{"childId": "...", "inputName": "Path", "value": "Examples:images/t3-logo-alpha.png"}'
 ```
 
 `GET /health` reports whether the bridge is connected; protocol endpoints return
 `503` until TiXL is listening. The bridge reconnects automatically. `GET
-/api/v1/methods` lists the typed methods, and `GET /api/v1/status` shows the
+/api/methods` lists the typed methods, and `GET /api/status` shows the
 connection and capture counters.
 
 ### Captures
@@ -254,15 +254,15 @@ Screenshots are written to `./captures` by default:
 
 ```bash
 # Metadata + a /files URL
-curl -s -X POST http://127.0.0.1:8787/api/v1/screenshot \
+curl -s -X POST http://127.0.0.1:8787/api/screenshot \
   -H 'content-type: application/json' -d '{"target": "output"}'
 
 # Image bytes
-curl -s -X POST 'http://127.0.0.1:8787/api/v1/screenshot?inline=true' \
+curl -s -X POST 'http://127.0.0.1:8787/api/screenshot?inline=true' \
   -H 'content-type: application/json' -d '{"target": "ui"}' -o ui.png
 
 # Or send Accept: image/png
-curl -s -X POST http://127.0.0.1:8787/api/v1/screenshot \
+curl -s -X POST http://127.0.0.1:8787/api/screenshot \
   -H 'accept: image/png' -H 'content-type: application/json' \
   -d '{"target": "output"}' -o output.png
 ```
