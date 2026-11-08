@@ -33,15 +33,6 @@ class EmptyResult(ResultModel):
     """The protocol's empty ``{}`` result."""
 
 
-class Envelope[T](ResultModel):
-    """The metadata TiXL stamps on every response."""
-
-    result: T
-    frame: int = -1
-    playback_frame: int = -1
-    structure_version: int = -1
-
-
 class Vector2(ApiModel):
     x: float = Field(alias="X")
     y: float = Field(alias="Y")
