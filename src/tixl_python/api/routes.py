@@ -17,7 +17,6 @@ from tixl_python.api.captures import (
 )
 from tixl_python.api.errors import from_tixl_error
 from tixl_python.api.middleware import capture_response_metadata
-from tixl_python.api.protocol import METHODS_BY_NAME
 from tixl_python.api.schemas import (
     AddOpRequest,
     AddOpResult,
@@ -48,8 +47,6 @@ from tixl_python.api.schemas import (
     GetVersionResult,
     GraphView,
     LayoutSelectionResult,
-    MethodInfo,
-    MethodsResponse,
     NewProjectRequest,
     NewProjectResult,
     OpenProjectRequest,
@@ -653,22 +650,6 @@ async def screenshot_window(
 # --------------------------------------------------------------------------- #
 # Server metadata
 # --------------------------------------------------------------------------- #
-
-
-@router.get("/methods", response_model=MethodsResponse, tags=["status"], summary="List typed methods.")
-async def list_methods() -> MethodsResponse:
-    methods = [
-        MethodInfo(
-            name=spec.name,
-            tag=spec.tag,
-            summary=spec.summary,
-            http_path=f"/api/{spec.name}",
-        )
-        for spec in METHODS_BY_NAME.values()
-    ]
-    return MethodsResponse(count=len(methods), methods=methods)
-
-
 @router.get("/status", response_model=StatusResponse, tags=["status"], summary="Bridge status.")
 async def status(bridge: BridgeDep, captures_dir: CapturesDep) -> StatusResponse:
     return StatusResponse(
