@@ -127,6 +127,7 @@ def create_app(settings: ApiSettings | None = None) -> FastAPI:
     )
     async def _health() -> HealthResponse:
         info = await bridge.version_info()
+
         return HealthResponse(
             status="ok" if bridge.connected else "degraded",
             connected=bridge.connected,
@@ -136,6 +137,7 @@ def create_app(settings: ApiSettings | None = None) -> FastAPI:
             captures_dir=str(captures_dir),
             protocol_version=info.protocol_version,
             editor_version=info.editor_version,
+            requests_sent=bridge.request_count,
             last_error=bridge.last_error,
         )
 

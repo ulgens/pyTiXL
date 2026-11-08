@@ -87,7 +87,6 @@ from tixl_python.api.schemas import (
     StallMainThreadRequest,
     StartRenderRequest,
     StartRenderResult,
-    StatusResponse,
     UndoRedoResult,
 )
 from tixl_python.client import TixlError
@@ -645,20 +644,6 @@ async def screenshot_window(
     if inline or wants_image(request):
         return image_response(written)
     return screenshot_response(request, written, captures_dir)
-
-
-# --------------------------------------------------------------------------- #
-# Server metadata
-# --------------------------------------------------------------------------- #
-@router.get("/status", response_model=StatusResponse, tags=["status"], summary="Bridge status.")
-async def status(bridge: BridgeDep, captures_dir: CapturesDep) -> StatusResponse:
-    return StatusResponse(
-        connected=bridge.connected,
-        tixl_host=bridge.host,
-        tixl_port=bridge.port,
-        captures_dir=str(captures_dir),
-        requests_sent=bridge.request_count,
-    )
 
 
 @router.get("/version", tags=["status"], summary="API version.")

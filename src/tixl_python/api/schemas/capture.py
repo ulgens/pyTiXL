@@ -34,6 +34,7 @@ class HealthResponse(ResultModel):
     captures_dir: str
     protocol_version: int | None = None
     editor_version: str | None = None
+    requests_sent: int
     last_error: str | None = None
 
 
@@ -48,11 +49,3 @@ class MethodInfo(ResultModel):
 class MethodsResponse(ResultModel):
     count: int
     methods: list[MethodInfo] = Field(default_factory=list)
-
-
-class StatusResponse(ResultModel):
-    connected: bool
-    tixl_host: str
-    tixl_port: int
-    captures_dir: str
-    requests_sent: int

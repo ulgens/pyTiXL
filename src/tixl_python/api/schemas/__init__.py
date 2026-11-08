@@ -14,7 +14,6 @@ from tixl_python.api.schemas.capture import (
     ScreenshotRequest,
     ScreenshotResponse,
     ScreenshotWindowRequest,
-    StatusResponse,
 )
 from tixl_python.api.schemas.common import (
     ApiModel,
@@ -183,7 +182,6 @@ __all__ = [
     "StallMainThreadRequest",
     "StartRenderRequest",
     "StartRenderResult",
-    "StatusResponse",
     "UndoRedoResult",
     "Vector2",
     "Vector3",
