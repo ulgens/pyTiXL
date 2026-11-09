@@ -224,9 +224,9 @@ request and response models:
 GET /api/version
 GET /api/graph-state
 POST /api/set-input
-POST /api/add-op
-POST /api/connect
-DELETE /api/op
+POST /api/operators
+POST /api/connect-operators
+DELETE /api/operators
 POST /api/screenshot
 POST /api/new-project
 ...

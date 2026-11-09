@@ -6,8 +6,7 @@ The package is only importable when the ``api`` extra is installed:
     pytixl-api --tixl-port 9042
 """
 
-from pytixl.api.app import create_app
 from pytixl.api.bridge import TixlBridge
 from pytixl.api.settings import ApiSettings
 
-__all__ = ["ApiSettings", "TixlBridge", "create_app"]
+__all__ = ["ApiSettings", "TixlBridge"]
