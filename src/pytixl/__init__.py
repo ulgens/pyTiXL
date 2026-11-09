@@ -1,9 +1,9 @@
 """A small, Pythonic library for building and capturing TiXL patches."""
 
-from tixl_python.capture import Capture
-from tixl_python.client import TixlClient, TixlError
-from tixl_python.editor import EditorSession
-from tixl_python.operators import (
+from pytixl.capture import Capture
+from pytixl.client import TixlClient, TixlError
+from pytixl.editor import EditorSession
+from pytixl.operators import (
     AsciiRender,
     InputRef,
     LoadImage,
@@ -11,7 +11,7 @@ from tixl_python.operators import (
     OutputRef,
     Port,
 )
-from tixl_python.patch import Patch
+from pytixl.patch import Patch
 
 __version__ = "0.1.0"
 

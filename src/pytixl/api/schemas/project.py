@@ -6,7 +6,7 @@ from uuid import UUID
 
 from pydantic import model_validator
 
-from tixl_python.api.schemas.common import ApiModel, ResultModel
+from pytixl.api.schemas.common import ApiModel, ResultModel
 
 
 class OpenProjectRequest(ApiModel):

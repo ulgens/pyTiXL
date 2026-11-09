@@ -3,7 +3,7 @@
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from tixl_python.config import DEFAULT_PORT
+from pytixl.config import DEFAULT_PORT
 
 DEFAULT_API_HOST = "127.0.0.1"
 DEFAULT_API_PORT = 8787

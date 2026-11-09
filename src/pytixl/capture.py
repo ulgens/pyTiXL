@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-from tixl_python.client import TixlClient, TixlError
+from pytixl.client import TixlClient, TixlError
 
 log = logging.getLogger(__name__)
 
@@ -25,7 +25,7 @@ __all__ = [
 
 @dataclass(frozen=True)
 class Capture:
-    """Files produced by :meth:`tixl_python.Patch.screenshot`."""
+    """Files produced by :meth:`pytixl.Patch.screenshot`."""
 
     graph: Path | None = None
     output: Path | None = None

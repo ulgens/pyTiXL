@@ -6,18 +6,18 @@ from typing import Annotated, Any
 from fastapi import APIRouter, Depends, Query, Request
 from fastapi.responses import Response
 
-from tixl_python import __version__
-from tixl_python.api.bridge import TixlBridge
-from tixl_python.api.captures import (
+from pytixl import __version__
+from pytixl.api.bridge import TixlBridge
+from pytixl.api.captures import (
     image_response,
     resolve_capture_path,
     screenshot_response,
     timestamped_name,
     wants_image,
 )
-from tixl_python.api.errors import from_tixl_error
-from tixl_python.api.middleware import capture_response_metadata
-from tixl_python.api.schemas import (
+from pytixl.api.errors import from_tixl_error
+from pytixl.api.middleware import capture_response_metadata
+from pytixl.api.schemas import (
     AddOpRequest,
     AddOpResult,
     ApiModel,
@@ -89,8 +89,8 @@ from tixl_python.api.schemas import (
     StartRenderResult,
     UndoRedoResult,
 )
-from tixl_python.client import TixlError
-from tixl_python.config import DEFAULT_PORT
+from pytixl.client import TixlError
+from pytixl.config import DEFAULT_PORT
 
 router = APIRouter(prefix="/api")
 
@@ -648,4 +648,4 @@ async def screenshot_window(
 
 @router.get("/version", tags=["status"], summary="API version.")
 async def api_version() -> dict[str, str]:
-    return {"name": "tixl-python", "version": __version__, "default_tixl_port": str(DEFAULT_PORT)}
+    return {"name": "pyTiXL", "version": __version__, "default_tixl_port": str(DEFAULT_PORT)}

@@ -5,7 +5,7 @@ from contextvars import ContextVar
 from starlette.datastructures import MutableHeaders
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
-from tixl_python.api.bridge import CallResult
+from pytixl.api.bridge import CallResult
 
 FRAME_HEADER = "X-TiXL-Frame"
 PLAYBACK_FRAME_HEADER = "X-TiXL-Playback-Frame"

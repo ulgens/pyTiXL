@@ -12,8 +12,8 @@ import time
 from pathlib import Path
 from typing import TextIO
 
-from tixl_python.client import TixlClient, try_connect
-from tixl_python.config import DEFAULT_PORT, STARTUP_TIMEOUT_SECONDS
+from pytixl.client import TixlClient, try_connect
+from pytixl.config import DEFAULT_PORT, STARTUP_TIMEOUT_SECONDS
 
 log = logging.getLogger(__name__)
 

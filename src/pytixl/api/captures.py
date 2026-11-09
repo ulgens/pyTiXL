@@ -8,7 +8,7 @@ from urllib.parse import quote
 from fastapi import Request
 from fastapi.responses import FileResponse, Response
 
-from tixl_python.api.schemas import ScreenshotResponse
+from pytixl.api.schemas import ScreenshotResponse
 
 
 def timestamped_name(stem: str, suffix: str = ".png") -> str:

@@ -13,19 +13,19 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, ClassVar
 
-from tixl_python.capture import (
+from pytixl.capture import (
     Capture,
     capture_graph,
     capture_output,
     resolve_capture_paths,
 )
-from tixl_python.client import TixlClient, TixlError
-from tixl_python.config import (
+from pytixl.client import TixlClient, TixlError
+from pytixl.config import (
     DEFAULT_PORT,
     PROJECT_CREATE_TIMEOUT_SECONDS,
 )
-from tixl_python.editor import EditorSession
-from tixl_python.operators import Operator
+from pytixl.editor import EditorSession
+from pytixl.operators import Operator
 
 log = logging.getLogger(__name__)
 

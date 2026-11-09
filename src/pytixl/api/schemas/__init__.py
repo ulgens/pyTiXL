@@ -1,13 +1,13 @@
 """Pydantic schemas for the typed TiXL bridge API."""
 
-from tixl_python.api.schemas.audio import (
+from pytixl.api.schemas.audio import (
     AudioDevice,
     AudioRecordingResult,
     GetAudioInputsResult,
     SetAudioInputRequest,
     SetAudioInputResult,
 )
-from tixl_python.api.schemas.capture import (
+from pytixl.api.schemas.capture import (
     HealthResponse,
     MethodInfo,
     MethodsResponse,
@@ -15,7 +15,7 @@ from tixl_python.api.schemas.capture import (
     ScreenshotResponse,
     ScreenshotWindowRequest,
 )
-from tixl_python.api.schemas.common import (
+from pytixl.api.schemas.common import (
     ApiModel,
     EmptyResult,
     Int2,
@@ -25,7 +25,7 @@ from tixl_python.api.schemas.common import (
     Vector3,
     Vector4,
 )
-from tixl_python.api.schemas.graph import (
+from pytixl.api.schemas.graph import (
     AddOpRequest,
     AddOpResult,
     ConnectRequest,
@@ -56,7 +56,7 @@ from tixl_python.api.schemas.graph import (
     SetInputRequest,
     SetInputResult,
 )
-from tixl_python.api.schemas.project import (
+from pytixl.api.schemas.project import (
     NewProjectRequest,
     NewProjectResult,
     OpenProjectRequest,
@@ -66,13 +66,13 @@ from tixl_python.api.schemas.project import (
     ReloadRequest,
     ReloadResult,
 )
-from tixl_python.api.schemas.render import (
+from pytixl.api.schemas.render import (
     CancelRenderResult,
     RenderStatusResult,
     StartRenderRequest,
     StartRenderResult,
 )
-from tixl_python.api.schemas.system import (
+from pytixl.api.schemas.system import (
     GetContextResult,
     GetFrameSamplesResult,
     GetLogTailRequest,
