@@ -6,7 +6,6 @@ from typing import Annotated, Any
 from fastapi import APIRouter, Depends, Query, Request
 from fastapi.responses import Response
 
-from pytixl import __version__
 from pytixl.api.bridge import TixlBridge
 from pytixl.api.captures import (
     image_response,
@@ -90,7 +89,6 @@ from pytixl.api.schemas import (
     UndoRedoResult,
 )
 from pytixl.client import TixlError
-from pytixl.config import DEFAULT_PORT
 
 router = APIRouter(prefix="/api")
 
@@ -644,8 +642,3 @@ async def screenshot_window(
     if inline or wants_image(request):
         return image_response(written)
     return screenshot_response(request, written, captures_dir)
-
-
-@router.get("/version", tags=["status"], summary="API version.")
-async def api_version() -> dict[str, str]:
-    return {"name": "pyTiXL", "version": __version__, "default_tixl_port": str(DEFAULT_PORT)}
