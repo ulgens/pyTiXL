@@ -7,10 +7,10 @@ from typing import Annotated
 
 import typer
 
-from tixl_python.client import TixlError
-from tixl_python.config import DEFAULT_IMAGE, DEFAULT_PORT
-from tixl_python.operators import AsciiRender, LoadImage
-from tixl_python.patch import Patch
+from pytixl.client import TixlError
+from pytixl.config import DEFAULT_IMAGE, DEFAULT_PORT
+from pytixl.operators import AsciiRender, LoadImage
+from pytixl.patch import Patch
 
 app = typer.Typer(add_completion=False)
 

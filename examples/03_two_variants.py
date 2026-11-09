@@ -9,7 +9,7 @@ import logging
 import sys
 from pathlib import Path
 
-from tixl_python import AsciiRender, LoadImage, Operator, Patch
+from pytixl import AsciiRender, LoadImage, Operator, Patch
 
 DEFAULT_IMAGE = "Examples:images/t3-logo-alpha.png"
 

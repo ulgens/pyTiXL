@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 from typing import ClassVar
 
-from tixl_python import AsciiRender, LoadImage, Operator, Patch, Port
+from pytixl import AsciiRender, LoadImage, Operator, Patch, Port
 
 DEFAULT_IMAGE = "Examples:images/t3-logo-alpha.png"
 

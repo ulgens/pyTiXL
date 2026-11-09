@@ -1,6 +1,6 @@
 """HTTP error mapping for TiXL debug-protocol failures."""
 
-from tixl_python.client import TixlError
+from pytixl.client import TixlError
 
 # TiXL protocol codes grouped by the HTTP status a client should see.
 _STATUS_BY_CODE: dict[str, int] = {

@@ -7,7 +7,7 @@ from uuid import UUID
 
 from pydantic import Field, model_validator
 
-from tixl_python.api.schemas.common import ApiModel, Rect, ResultModel
+from pytixl.api.schemas.common import ApiModel, Rect, ResultModel
 
 
 class SelectRequest(ApiModel):

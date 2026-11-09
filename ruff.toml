@@ -100,10 +100,10 @@ ignore = [
 
 [lint.per-file-ignores]
 # The CLI's purpose is to print progress and results.
-"src/tixl_python/cli.py" = ["T201"]
+"src/pytixl/cli.py" = ["T201"]
 # These helpers invoke fixed local tools with explicit argument lists.
-"src/tixl_python/capture.py" = ["PERF203", "S603", "S607", "TRY300"]
-"src/tixl_python/editor.py" = ["S603", "S607"]
+"src/pytixl/capture.py" = ["PERF203", "S603", "S607", "TRY300"]
+"src/pytixl/editor.py" = ["S603", "S607"]
 # Examples are intentionally runnable scripts that print results and use the
 # library's public attribute name `ascii` (which shadows the builtin).
 "examples/*" = ["A003", "INP001", "T201"]

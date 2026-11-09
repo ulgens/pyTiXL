@@ -12,14 +12,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
-from tixl_python import __version__
-from tixl_python.api.auth import require_token
-from tixl_python.api.bridge import TixlBridge
-from tixl_python.api.errors import ApiError
-from tixl_python.api.middleware import TIXL_RESPONSE_HEADERS, TixlMetadataMiddleware
-from tixl_python.api.routes import router
-from tixl_python.api.schemas import HealthResponse
-from tixl_python.api.settings import ApiSettings
+from pytixl import __version__
+from pytixl.api.auth import require_token
+from pytixl.api.bridge import TixlBridge
+from pytixl.api.errors import ApiError
+from pytixl.api.middleware import TIXL_RESPONSE_HEADERS, TixlMetadataMiddleware
+from pytixl.api.routes import router
+from pytixl.api.schemas import HealthResponse
+from pytixl.api.settings import ApiSettings
 
 logger = logging.getLogger(__name__)
 
@@ -147,7 +147,7 @@ def create_app(settings: ApiSettings | None = None) -> FastAPI:
 
 
 def run() -> None:
-    """Console-script entry point kept for ``uvicorn tixl_python.api.app:app`` users."""
-    from tixl_python.api.cli import run as cli_run
+    """Console-script entry point kept for ``uvicorn pytixl.api.app:app`` users."""
+    from pytixl.api.cli import run as cli_run
 
     cli_run()

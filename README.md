@@ -1,4 +1,4 @@
-# tixl-python
+# pyTiXL
 
 
 > [!CAUTION]
@@ -11,7 +11,7 @@ A small, Pythonic library for building [TiXL](https://tixl.app) patches and capt
 their graph and rendered output.
 
 ```python
-from tixl_python import AsciiRender, LoadImage, Patch
+from pytixl import AsciiRender, LoadImage, Patch
 
 
 class MyPatch(Patch):
@@ -84,7 +84,7 @@ class MyPatch(Patch):
 Procedural patches use `add` instead:
 
 ```python
-from tixl_python import AsciiRender, LoadImage, Patch
+from pytixl import AsciiRender, LoadImage, Patch
 
 patch = Patch()
 image = patch.add(LoadImage("Examples:images/t3-logo-alpha.png"), "image")
@@ -98,7 +98,7 @@ patch.set_output(ascii)
 Any TiXL symbol can be wrapped by subclassing `Operator` and declaring its ports:
 
 ```python
-from tixl_python import Operator, Port
+from pytixl import Operator, Port
 
 
 class Blur(Operator):
@@ -182,12 +182,12 @@ removed unless `clean=False`.
 The original command-line workflow remains available:
 
 ```bash
-tixl-ascii
-tixl-ascii --image ~/Pictures/portrait.jpg
-tixl-ascii --image "Lib:images/basic/perlin-noise.jpg"
-tixl-ascii --out ./captures --keep-open
-tixl-ascii --project my_project
-tixl-ascii --help
+pytixl-ascii
+pytixl-ascii --image ~/Pictures/portrait.jpg
+pytixl-ascii --image "Lib:images/basic/perlin-noise.jpg"
+pytixl-ascii --out ./captures --keep-open
+pytixl-ascii --project my_project
+pytixl-ascii --help
 ```
 
 It is implemented on top of the library and writes `patch_graph.png` and
@@ -214,7 +214,7 @@ Swagger UI. It attaches to an already-running editor; it never launches TiXL.
 
 ```bash
 uv sync --extra api
-tixl-api --tixl-port 9042            # http://127.0.0.1:8787/docs
+pytixl-api --tixl-port 9042            # http://127.0.0.1:8787/docs
 ```
 
 Every TiXL protocol method has its own endpoint under `/api`, with Pydantic
@@ -276,7 +276,7 @@ are served at `/files/<name>` only when they are inside it. Use
 The server binds `127.0.0.1` by default. Binding elsewhere requires a token:
 
 ```bash
-TIXL_API_TOKEN=secret tixl-api --host 0.0.0.0 --port 8787
+TIXL_API_TOKEN=secret pytixl-api --host 0.0.0.0 --port 8787
 ```
 
 When `TIXL_API_TOKEN` (or `--token`) is set, every request needs

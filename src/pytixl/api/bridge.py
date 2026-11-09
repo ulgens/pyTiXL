@@ -12,7 +12,7 @@ import logging
 from dataclasses import dataclass
 from typing import Any
 
-from tixl_python.client import TixlError
+from pytixl.client import TixlError
 
 logger = logging.getLogger(__name__)
 

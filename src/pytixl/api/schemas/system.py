@@ -4,7 +4,7 @@ from typing import Literal
 
 from pydantic import Field
 
-from tixl_python.api.schemas.common import ApiModel, ResultModel
+from pytixl.api.schemas.common import ApiModel, ResultModel
 
 LogLevel = Literal["debug", "info", "warning", "warn", "error"]
 AgentState = Literal["busy", "ready", ""]

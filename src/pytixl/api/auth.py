@@ -6,7 +6,7 @@ from typing import Annotated
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
-from tixl_python.api.settings import ApiSettings
+from pytixl.api.settings import ApiSettings
 
 bearer_scheme = HTTPBearer(auto_error=False, description="Optional unless TIXL_API_TOKEN is set.")
 

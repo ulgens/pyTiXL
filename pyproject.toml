@@ -3,7 +3,7 @@ build-backend = "hatchling.build"
 requires = [ "hatchling" ]
 
 [project]
-name = "tixl-python-wrapper"
+name = "pytixl"
 description = "Pythonic library for building and capturing TiXL patches."
 readme = "README.md"
 license = "BSD-3-Clause"
@@ -26,9 +26,9 @@ api = [
 ]
 
 [project.scripts]
-tixl-ascii = "tixl_python.cli:run"
-tixl-python = "tixl_python.cli:run"
-tixl-api = "tixl_python.api.cli:run"
+pytixl-ascii = "pytixl.cli:run"
+pytixl = "pytixl.cli:run"
+pytixl-api = "pytixl.api.cli:run"
 
 [dependency-groups]
 dev = [
@@ -40,7 +40,7 @@ dev = [
 ]
 
 [tool.hatch.version]
-path = "src/tixl_python/__init__.py"
+path = "src/pytixl/__init__.py"
 
 [tool.hatch.build]
-targets.wheel.packages = [ "src/tixl_python" ]
+targets.wheel.packages = [ "src/pytixl" ]

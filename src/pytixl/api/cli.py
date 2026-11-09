@@ -1,11 +1,11 @@
-"""``tixl-api`` console script."""
+"""``pytixl-api`` console script."""
 
 from pathlib import Path
 from typing import Annotated
 
 import typer
 
-from tixl_python.api.settings import ApiSettings
+from pytixl.api.settings import ApiSettings
 
 app = typer.Typer(add_completion=False, no_args_is_help=True, help="Serve the typed TiXL bridge API.")
 
@@ -31,7 +31,7 @@ def serve(
     try:
         import uvicorn
 
-        from tixl_python.api.app import create_app
+        from pytixl.api.app import create_app
     except ImportError as exc:
         typer.echo(
             "The API extra is not installed. Run: uv sync --extra api",
