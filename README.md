@@ -221,12 +221,12 @@ Every TiXL protocol method has its own endpoint under `/api`, with Pydantic
 request and response models:
 
 ```text
-GET /api/getVersion
-GET /api/getGraphState
+GET /api/version
+GET /api/graphState
 POST /api/setInput
 POST /api/addOp
 POST /api/connect
-DELETE /api/deleteOp
+DELETE /api/op
 POST /api/screenshot
 POST /api/newProject
 ...
@@ -236,8 +236,8 @@ Query parameters and request and response bodies use TiXL's camelCase spelling.
 Python fields stay snake_case, and Swagger shows both the schema and examples.
 
 ```bash
-curl -s http://127.0.0.1:8787/api/getVersion
-curl -s 'http://127.0.0.1:8787/api/getGraphState?includeDefaults=true'
+curl -s http://127.0.0.1:8787/api/version
+curl -s 'http://127.0.0.1:8787/api/graphState?includeDefaults=true'
 curl -s -X POST http://127.0.0.1:8787/api/setInput \
   -H 'content-type: application/json' \
   -d '{"childId": "...", "inputName": "Path", "value": "Examples:images/t3-logo-alpha.png"}'

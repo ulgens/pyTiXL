@@ -149,12 +149,12 @@ async def set_agent_state(body: SetAgentStateRequest, bridge: BridgeDep) -> SetA
     return await _invoke(bridge, "setAgentState", body)
 
 
-@router.get("/getVersion", response_model=GetVersionResult, tags=["system"], summary="Protocol version.")
+@router.get("/version", response_model=GetVersionResult, tags=["system"], summary="Protocol version.")
 async def get_version(bridge: BridgeDep) -> GetVersionResult:
     return await _invoke(bridge, "getVersion")
 
 
-@router.get("/getPaths", response_model=GetPathsResult, tags=["system"], summary="Editor folders.")
+@router.get("/paths", response_model=GetPathsResult, tags=["system"], summary="Editor folders.")
 async def get_paths(bridge: BridgeDep) -> GetPathsResult:
     return await _invoke(bridge, "getPaths")
 
@@ -165,7 +165,7 @@ async def shutdown(bridge: BridgeDep) -> EmptyResult:
 
 
 @router.get(
-    "/getStructureVersion",
+    "/structure-version",
     response_model=GetStructureVersionResult,
     tags=["system"],
     summary="Symbol-structure version.",
@@ -216,7 +216,7 @@ async def set_frame_latency(
 
 
 @router.get(
-    "/getLogTail",
+    "/logTail",
     response_model=GetLogTailResult,
     tags=["diagnostics"],
     summary="Read recent log entries.",
@@ -229,7 +229,7 @@ async def get_log_tail(
 
 
 @router.get(
-    "/getMetrics",
+    "/metrics",
     response_model=GetMetricsResult,
     tags=["diagnostics"],
     summary="Frame and GPU metrics.",
@@ -239,7 +239,7 @@ async def get_metrics(bridge: BridgeDep) -> GetMetricsResult:
 
 
 @router.get(
-    "/getShaderErrors",
+    "/shaderErrors",
     response_model=GetShaderErrorsResult,
     tags=["diagnostics"],
     summary="Recent shader compile failures.",
@@ -252,7 +252,7 @@ async def get_shader_errors(
 
 
 @router.get(
-    "/getFrameSamples",
+    "/frameSamples",
     response_model=GetFrameSamplesResult,
     tags=["diagnostics"],
     summary="Rolling frame durations.",
@@ -286,13 +286,13 @@ async def release_gpu_resources(bridge: BridgeDep) -> EmptyResult:
 # --------------------------------------------------------------------------- #
 
 
-@router.get("/getContext", response_model=GetContextResult, tags=["graph"], summary="Editor context.")
+@router.get("/context", response_model=GetContextResult, tags=["graph"], summary="Editor context.")
 async def get_context(bridge: BridgeDep) -> GetContextResult:
     return await _invoke(bridge, "getContext")
 
 
 @router.get(
-    "/getGraphState",
+    "/graphState",
     response_model=GetGraphStateResult,
     tags=["graph"],
     summary="Children, inputs, and connections.",
@@ -309,7 +309,7 @@ async def select(body: SelectRequest, bridge: BridgeDep) -> SelectResult:
     return await _invoke(bridge, "select", body)
 
 
-@router.get("/getGraphView", response_model=GraphView, tags=["graph"], summary="Graph camera state.")
+@router.get("/graphView", response_model=GraphView, tags=["graph"], summary="Graph camera state.")
 async def get_graph_view(bridge: BridgeDep) -> GraphView:
     return await _invoke(bridge, "getGraphView")
 
@@ -342,7 +342,7 @@ async def set_input(body: SetInputRequest, bridge: BridgeDep) -> SetInputResult:
     return await _invoke(bridge, "setInput", body)
 
 
-@router.get("/getOutput", response_model=GetOutputResult, tags=["graph"], summary="Read an output value.")
+@router.get("/output", response_model=GetOutputResult, tags=["graph"], summary="Read an output value.")
 async def get_output(
     query: Annotated[GetOutputRequest, Query()],
     bridge: BridgeDep,
@@ -365,7 +365,7 @@ async def connect(body: ConnectRequest, bridge: BridgeDep) -> EmptyResult:
     return await _invoke(bridge, "connect", body)
 
 
-@router.delete("/deleteOp", response_model=EmptyResult, tags=["graph"], summary="Delete one operator.")
+@router.delete("/op", response_model=EmptyResult, tags=["graph"], summary="Delete one operator.")
 async def delete_op(
     query: Annotated[DeleteOpRequest, Query()],
     bridge: BridgeDep,
@@ -399,7 +399,7 @@ async def layout_selection(bridge: BridgeDep) -> LayoutSelectionResult:
 
 
 @router.delete(
-    "/deleteSelection",
+    "/selection",
     response_model=DeleteSelectionResult,
     tags=["graph"],
     summary="Delete the selection.",
@@ -492,7 +492,7 @@ async def set_playback(body: SetPlaybackRequest, bridge: BridgeDep) -> SetPlayba
 
 
 @router.get(
-    "/getAudioInputs",
+    "/audioInputs",
     response_model=GetAudioInputsResult,
     tags=["audio"],
     summary="List capture devices.",
@@ -556,7 +556,7 @@ async def start_render(
 
 
 @router.get(
-    "/getRenderStatus",
+    "/renderStatus",
     response_model=RenderStatusResult,
     tags=["render"],
     summary="Poll export progress.",
