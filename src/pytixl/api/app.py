@@ -3,7 +3,6 @@
 import logging
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
-from typing import Any
 
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.encoders import jsonable_encoder
@@ -18,22 +17,10 @@ from pytixl.api.bridge import TixlBridge
 from pytixl.api.errors import ApiError
 from pytixl.api.middleware import TIXL_RESPONSE_HEADERS, TixlMetadataMiddleware
 from pytixl.api.routes import router
-from pytixl.api.schemas import HealthResponse
 from pytixl.api.settings import ApiSettings
 
 logger = logging.getLogger(__name__)
 
-TAGS_METADATA: list[dict[str, Any]] = [
-    {"name": "system", "description": "Version, folders, settings, and agent state."},
-    {"name": "graph", "description": "Operators, inputs, connections, selection, and camera."},
-    {"name": "project", "description": "Open, create, reload, and drive project windows."},
-    {"name": "capture", "description": "Graph, output, and editor-window screenshots."},
-    {"name": "render", "description": "Video export from the pinned output."},
-    {"name": "audio", "description": "Input devices and WAV recording."},
-    {"name": "playback", "description": "Time and playback speed."},
-    {"name": "diagnostics", "description": "Logs, metrics, shader failures, and frame samples."},
-    {"name": "status", "description": "HTTP bridge health and method discovery."},
-]
 
 DESCRIPTION = """
 Typed HTTP facade over TiXL's local JSON-lines debug bridge.
@@ -66,7 +53,6 @@ def create_app(settings: ApiSettings | None = None) -> FastAPI:
         version=__version__,
         description=DESCRIPTION,
         lifespan=lifespan,
-        openapi_tags=TAGS_METADATA,
     )
     app.state.settings = settings
     app.state.bridge = bridge
@@ -117,28 +103,6 @@ def create_app(settings: ApiSettings | None = None) -> FastAPI:
     @app.get("/", include_in_schema=False)
     async def _root() -> RedirectResponse:
         return RedirectResponse(url="/docs")
-
-    @app.get(
-        "/health",
-        response_model=HealthResponse,
-        tags=["status"],
-        dependencies=[Depends(require_token)],
-    )
-    async def _health() -> HealthResponse:
-        info = await bridge.version_info()
-
-        return HealthResponse(
-            status="ok" if bridge.connected else "degraded",
-            connected=bridge.connected,
-            tixl_host=bridge.host,
-            tixl_port=bridge.port,
-            api_version=__version__,
-            captures_dir=str(captures_dir),
-            protocol_version=info.protocol_version,
-            editor_version=info.editor_version,
-            requests_sent=bridge.request_count,
-            last_error=bridge.last_error,
-        )
 
     app.include_router(router, dependencies=[Depends(require_token)])
     app.mount("/files", StaticFiles(directory=str(captures_dir), check_dir=False), name="files")
