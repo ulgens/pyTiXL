@@ -21,7 +21,8 @@ dependencies = [
 
 [project.optional-dependencies]
 api = [
-    "fastapi>=0.115",
+    # [standard] allows to use "fastapi run" commands
+    "fastapi[standard]>=0.115",
     "uvicorn[standard]>=0.30",
 ]
 

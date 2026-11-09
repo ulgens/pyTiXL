@@ -146,6 +146,14 @@ def create_app(settings: ApiSettings | None = None) -> FastAPI:
     return app
 
 
+# Create an entrypoint for `fastapi run`
+# TODO:
+#   fastapi entrypoint duplicates the uvicorn entrypoint, but with "--reload option"
+#   uvicorn.run(reload=True) causes an issue that I don't understand yet.
+#   There should be one and only entrypoint that supports reload and accessible via pyproject scripts.
+app = create_app()
+
+
 def run() -> None:
     """Console-script entry point kept for ``uvicorn pytixl.api.app:app`` users."""
     from pytixl.api.cli import run as cli_run
