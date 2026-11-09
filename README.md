@@ -222,13 +222,13 @@ request and response models:
 
 ```text
 GET /api/version
-GET /api/graphState
-POST /api/setInput
-POST /api/addOp
+GET /api/graph-state
+POST /api/set-input
+POST /api/add-op
 POST /api/connect
 DELETE /api/op
 POST /api/screenshot
-POST /api/newProject
+POST /api/new-project
 ...
 ```
 
@@ -237,8 +237,8 @@ Python fields stay snake_case, and Swagger shows both the schema and examples.
 
 ```bash
 curl -s http://127.0.0.1:8787/api/version
-curl -s 'http://127.0.0.1:8787/api/graphState?includeDefaults=true'
-curl -s -X POST http://127.0.0.1:8787/api/setInput \
+curl -s 'http://127.0.0.1:8787/api/graph-state?includeDefaults=true'
+curl -s -X POST http://127.0.0.1:8787/api/set-input \
   -H 'content-type: application/json' \
   -d '{"childId": "...", "inputName": "Path", "value": "Examples:images/t3-logo-alpha.png"}'
 ```
