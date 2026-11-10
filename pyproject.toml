@@ -12,10 +12,19 @@ authors = [
 ]
 requires-python = ">=3.13"
 classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    # FIXME: trove doesn't have artists / designers as intended audience
+    "Intended Audience :: Other Audience",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
+    "Topic :: Artistic Software",
+    "Topic :: Multimedia",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Multimedia :: Video",
 ]
 dynamic = [ "version" ]
 dependencies = [
