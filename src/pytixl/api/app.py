@@ -122,7 +122,6 @@ def create_app(settings: ApiSettings | None = None) -> FastAPI:
         "/health",
         response_model=HealthResponse,
         tags=["status"],
-        summary="Bridge connectivity and version.",
         dependencies=[Depends(require_token)],
     )
     async def _health() -> HealthResponse:

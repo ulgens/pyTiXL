@@ -134,7 +134,7 @@ async def _invoke(
 # --------------------------------------------------------------------------- #
 
 
-@router.post("/ping", response_model=EmptyResult, tags=["system"], summary="Ping the editor.")
+@router.post("/ping", response_model=EmptyResult, tags=["system"])
 async def ping(bridge: BridgeDep) -> EmptyResult:
     return await _invoke(bridge, "ping")
 
@@ -143,23 +143,22 @@ async def ping(bridge: BridgeDep) -> EmptyResult:
     "/set-agent-state",
     response_model=SetAgentStateResult,
     tags=["system"],
-    summary="Announce whether the agent is busy or ready.",
 )
 async def set_agent_state(body: SetAgentStateRequest, bridge: BridgeDep) -> SetAgentStateResult:
     return await _invoke(bridge, "setAgentState", body)
 
 
-@router.get("/version", response_model=GetVersionResult, tags=["system"], summary="Protocol version.")
+@router.get("/version", response_model=GetVersionResult, tags=["system"])
 async def get_version(bridge: BridgeDep) -> GetVersionResult:
     return await _invoke(bridge, "getVersion")
 
 
-@router.get("/paths", response_model=GetPathsResult, tags=["system"], summary="Editor folders.")
+@router.get("/paths", response_model=GetPathsResult, tags=["system"])
 async def get_paths(bridge: BridgeDep) -> GetPathsResult:
     return await _invoke(bridge, "getPaths")
 
 
-@router.post("/shutdown", response_model=EmptyResult, tags=["system"], summary="Exit the editor.")
+@router.post("/shutdown", response_model=EmptyResult, tags=["system"])
 async def shutdown(bridge: BridgeDep) -> EmptyResult:
     return await _invoke(bridge, "shutdown")
 
@@ -168,7 +167,6 @@ async def shutdown(bridge: BridgeDep) -> EmptyResult:
     "/structure-version",
     response_model=GetStructureVersionResult,
     tags=["system"],
-    summary="Symbol-structure version.",
 )
 async def get_structure_version(bridge: BridgeDep) -> GetStructureVersionResult:
     return await _invoke(bridge, "getStructureVersion", timeout=30.0)
@@ -178,7 +176,6 @@ async def get_structure_version(bridge: BridgeDep) -> GetStructureVersionResult:
     "/set-vsync",
     response_model=SetVSyncResult,
     tags=["system"],
-    summary="Read or change VSync.",
 )
 async def set_vsync(body: SetVSyncRequest, bridge: BridgeDep) -> SetVSyncResult:
     return await _invoke(bridge, "setVSync", body)
@@ -188,7 +185,6 @@ async def set_vsync(body: SetVSyncRequest, bridge: BridgeDep) -> SetVSyncResult:
     "/set-target-frame-rate",
     response_model=SetTargetFrameRateResult,
     tags=["system"],
-    summary="Read or change the target frame rate.",
 )
 async def set_target_frame_rate(
     body: SetTargetFrameRateRequest,
@@ -201,7 +197,6 @@ async def set_target_frame_rate(
     "/set-frame-latency",
     response_model=SetFrameLatencyResult,
     tags=["system"],
-    summary="Read or change frames in flight.",
 )
 async def set_frame_latency(
     body: SetFrameLatencyRequest,
@@ -219,7 +214,6 @@ async def set_frame_latency(
     "/log-tail",
     response_model=GetLogTailResult,
     tags=["diagnostics"],
-    summary="Read recent log entries.",
 )
 async def get_log_tail(
     query: Annotated[GetLogTailRequest, Query()],
@@ -232,7 +226,6 @@ async def get_log_tail(
     "/metrics",
     response_model=GetMetricsResult,
     tags=["diagnostics"],
-    summary="Frame and GPU metrics.",
 )
 async def get_metrics(bridge: BridgeDep) -> GetMetricsResult:
     return await _invoke(bridge, "getMetrics")
@@ -242,7 +235,6 @@ async def get_metrics(bridge: BridgeDep) -> GetMetricsResult:
     "/shader-errors",
     response_model=GetShaderErrorsResult,
     tags=["diagnostics"],
-    summary="Recent shader compile failures.",
 )
 async def get_shader_errors(
     query: Annotated[GetShaderErrorsRequest, Query()],
@@ -255,7 +247,6 @@ async def get_shader_errors(
     "/frame-samples",
     response_model=GetFrameSamplesResult,
     tags=["diagnostics"],
-    summary="Rolling frame durations.",
 )
 async def get_frame_samples(bridge: BridgeDep) -> GetFrameSamplesResult:
     return await _invoke(bridge, "getFrameSamples")
@@ -265,7 +256,6 @@ async def get_frame_samples(bridge: BridgeDep) -> GetFrameSamplesResult:
     "/stall-main-thread",
     response_model=EmptyResult,
     tags=["diagnostics"],
-    summary="Block the main thread to test the stall overlay.",
 )
 async def stall_main_thread(body: StallMainThreadRequest, bridge: BridgeDep) -> EmptyResult:
     return await _invoke(bridge, "stallMainThread", body, timeout=body.seconds + 60.0)
@@ -275,7 +265,6 @@ async def stall_main_thread(body: StallMainThreadRequest, bridge: BridgeDep) -> 
     "/release-gpu-resources",
     response_model=EmptyResult,
     tags=["diagnostics"],
-    summary="Free GPU resources at the next frame.",
 )
 async def release_gpu_resources(bridge: BridgeDep) -> EmptyResult:
     return await _invoke(bridge, "releaseGpuResources")
@@ -286,7 +275,7 @@ async def release_gpu_resources(bridge: BridgeDep) -> EmptyResult:
 # --------------------------------------------------------------------------- #
 
 
-@router.get("/context", response_model=GetContextResult, tags=["graph"], summary="Editor context.")
+@router.get("/context", response_model=GetContextResult, tags=["graph"])
 async def get_context(bridge: BridgeDep) -> GetContextResult:
     return await _invoke(bridge, "getContext")
 
@@ -295,7 +284,6 @@ async def get_context(bridge: BridgeDep) -> GetContextResult:
     "/graph-state",
     response_model=GetGraphStateResult,
     tags=["graph"],
-    summary="Children, inputs, and connections.",
 )
 async def get_graph_state(
     query: Annotated[GetGraphStateRequest, Query()],
@@ -304,12 +292,12 @@ async def get_graph_state(
     return await _invoke(bridge, "getGraphState", query)
 
 
-@router.post("/select", response_model=SelectResult, tags=["graph"], summary="Change the selection.")
+@router.post("/select", response_model=SelectResult, tags=["graph"])
 async def select(body: SelectRequest, bridge: BridgeDep) -> SelectResult:
     return await _invoke(bridge, "select", body)
 
 
-@router.get("/graph-view", response_model=GraphView, tags=["graph"], summary="Graph camera state.")
+@router.get("/graph-view", response_model=GraphView, tags=["graph"])
 async def get_graph_view(bridge: BridgeDep) -> GraphView:
     return await _invoke(bridge, "getGraphView")
 
@@ -318,7 +306,6 @@ async def get_graph_view(bridge: BridgeDep) -> GraphView:
     "/set-graph-view",
     response_model=SetGraphViewResult,
     tags=["graph"],
-    summary="Move or zoom the graph camera.",
 )
 async def set_graph_view(body: SetGraphViewRequest, bridge: BridgeDep) -> SetGraphViewResult:
     return await _invoke(bridge, "setGraphView", body)
@@ -328,7 +315,6 @@ async def set_graph_view(body: SetGraphViewRequest, bridge: BridgeDep) -> SetGra
     "/focus-graph-view",
     response_model=FocusGraphViewResult,
     tags=["graph"],
-    summary="Frame children or the whole graph.",
 )
 async def focus_graph_view(
     body: FocusGraphViewRequest,
@@ -337,12 +323,12 @@ async def focus_graph_view(
     return await _invoke(bridge, "focusGraphView", body)
 
 
-@router.post("/set-input", response_model=SetInputResult, tags=["graph"], summary="Set an input value.")
+@router.post("/set-input", response_model=SetInputResult, tags=["graph"])
 async def set_input(body: SetInputRequest, bridge: BridgeDep) -> SetInputResult:
     return await _invoke(bridge, "setInput", body)
 
 
-@router.get("/output", response_model=GetOutputResult, tags=["graph"], summary="Read an output value.")
+@router.get("/output", response_model=GetOutputResult, tags=["graph"])
 async def get_output(
     query: Annotated[GetOutputRequest, Query()],
     bridge: BridgeDep,
@@ -350,22 +336,22 @@ async def get_output(
     return await _invoke(bridge, "getOutput", query)
 
 
-@router.post("/pump-frames", response_model=EmptyResult, tags=["graph"], summary="Advance frames.")
+@router.post("/pump-frames", response_model=EmptyResult, tags=["graph"])
 async def pump_frames(body: PumpFramesRequest | None = None, *, bridge: BridgeDep) -> EmptyResult:
     return await _invoke(bridge, "pumpFrames", body)
 
 
-@router.post("/add-op", response_model=AddOpResult, tags=["graph"], summary="Add an operator.")
+@router.post("/add-op", response_model=AddOpResult, tags=["graph"])
 async def add_op(body: AddOpRequest, bridge: BridgeDep) -> AddOpResult:
     return await _invoke(bridge, "addOp", body)
 
 
-@router.post("/connect", response_model=EmptyResult, tags=["graph"], summary="Connect output to input.")
+@router.post("/connect", response_model=EmptyResult, tags=["graph"])
 async def connect(body: ConnectRequest, bridge: BridgeDep) -> EmptyResult:
     return await _invoke(bridge, "connect", body)
 
 
-@router.delete("/op", response_model=EmptyResult, tags=["graph"], summary="Delete one operator.")
+@router.delete("/op", response_model=EmptyResult, tags=["graph"])
 async def delete_op(
     query: Annotated[DeleteOpRequest, Query()],
     bridge: BridgeDep,
@@ -373,17 +359,17 @@ async def delete_op(
     return await _invoke(bridge, "deleteOp", query)
 
 
-@router.post("/pin", response_model=EmptyResult, tags=["graph"], summary="Pin an operator to the output.")
+@router.post("/pin", response_model=EmptyResult, tags=["graph"])
 async def pin(body: PinRequest, bridge: BridgeDep) -> EmptyResult:
     return await _invoke(bridge, "pin", body)
 
 
-@router.post("/set-bypass", response_model=SetBypassResult, tags=["graph"], summary="Bypass an operator.")
+@router.post("/set-bypass", response_model=SetBypassResult, tags=["graph"])
 async def set_bypass(body: SetBypassRequest, bridge: BridgeDep) -> SetBypassResult:
     return await _invoke(bridge, "setBypass", body)
 
 
-@router.post("/reset-view", response_model=EmptyResult, tags=["graph"], summary="Reset the output camera.")
+@router.post("/reset-view", response_model=EmptyResult, tags=["graph"])
 async def reset_view(bridge: BridgeDep) -> EmptyResult:
     return await _invoke(bridge, "resetView")
 
@@ -392,7 +378,6 @@ async def reset_view(bridge: BridgeDep) -> EmptyResult:
     "/layout-selection",
     response_model=LayoutSelectionResult,
     tags=["graph"],
-    summary="Layout the selection.",
 )
 async def layout_selection(bridge: BridgeDep) -> LayoutSelectionResult:
     return await _invoke(bridge, "layoutSelection")
@@ -402,7 +387,6 @@ async def layout_selection(bridge: BridgeDep) -> LayoutSelectionResult:
     "/selection",
     response_model=DeleteSelectionResult,
     tags=["graph"],
-    summary="Delete the selection.",
 )
 async def delete_selection(
     query: Annotated[DeleteSelectionRequest, Query()],
@@ -411,12 +395,12 @@ async def delete_selection(
     return await _invoke(bridge, "deleteSelection", query)
 
 
-@router.post("/undo", response_model=UndoRedoResult, tags=["graph"], summary="Undo one command.")
+@router.post("/undo", response_model=UndoRedoResult, tags=["graph"])
 async def undo(bridge: BridgeDep) -> UndoRedoResult:
     return await _invoke(bridge, "undo")
 
 
-@router.post("/redo", response_model=UndoRedoResult, tags=["graph"], summary="Redo one command.")
+@router.post("/redo", response_model=UndoRedoResult, tags=["graph"])
 async def redo(bridge: BridgeDep) -> UndoRedoResult:
     return await _invoke(bridge, "redo")
 
@@ -430,7 +414,6 @@ async def redo(bridge: BridgeDep) -> UndoRedoResult:
     "/open-project",
     response_model=OpenProjectResult,
     tags=["project"],
-    summary="Open an existing project.",
 )
 async def open_project(body: OpenProjectRequest, bridge: BridgeDep) -> OpenProjectResult:
     return await _invoke(bridge, "openProject", body)
@@ -440,18 +423,17 @@ async def open_project(body: OpenProjectRequest, bridge: BridgeDep) -> OpenProje
     "/new-project",
     response_model=NewProjectResult,
     tags=["project"],
-    summary="Create and open a project.",
 )
 async def new_project(body: NewProjectRequest, bridge: BridgeDep) -> NewProjectResult:
     return await _invoke(bridge, "newProject", body)
 
 
-@router.post("/reload", response_model=ReloadResult, tags=["project"], summary="Recompile a project.")
+@router.post("/reload", response_model=ReloadResult, tags=["project"])
 async def reload_project(body: ReloadRequest, bridge: BridgeDep) -> ReloadResult:
     return await _invoke(bridge, "reload", body)
 
 
-@router.post("/open-window", response_model=OpenWindowResult, tags=["project"], summary="Show a window.")
+@router.post("/open-window", response_model=OpenWindowResult, tags=["project"])
 async def open_window(body: OpenWindowRequest, bridge: BridgeDep) -> OpenWindowResult:
     return await _invoke(bridge, "openWindow", body)
 
@@ -460,7 +442,6 @@ async def open_window(body: OpenWindowRequest, bridge: BridgeDep) -> OpenWindowR
     "/output-setup",
     response_model=EmptyResult,
     tags=["project"],
-    summary="Drive the output setup UI.",
 )
 async def output_setup(body: OutputSetupRequest, bridge: BridgeDep) -> EmptyResult:
     return await _invoke(bridge, "outputSetup", body)
@@ -471,7 +452,7 @@ async def output_setup(body: OutputSetupRequest, bridge: BridgeDep) -> EmptyResu
 # --------------------------------------------------------------------------- #
 
 
-@router.post("/set-time", response_model=SetTimeResult, tags=["playback"], summary="Set playback time.")
+@router.post("/set-time", response_model=SetTimeResult, tags=["playback"])
 async def set_time(body: SetTimeRequest, bridge: BridgeDep) -> SetTimeResult:
     return await _invoke(bridge, "setTime", body)
 
@@ -480,7 +461,6 @@ async def set_time(body: SetTimeRequest, bridge: BridgeDep) -> SetTimeResult:
     "/set-playback",
     response_model=SetPlaybackResult,
     tags=["playback"],
-    summary="Set playback speed or playing state.",
 )
 async def set_playback(body: SetPlaybackRequest, bridge: BridgeDep) -> SetPlaybackResult:
     return await _invoke(bridge, "setPlayback", body)
@@ -495,7 +475,6 @@ async def set_playback(body: SetPlaybackRequest, bridge: BridgeDep) -> SetPlayba
     "/audio-inputs",
     response_model=GetAudioInputsResult,
     tags=["audio"],
-    summary="List capture devices.",
 )
 async def get_audio_inputs(bridge: BridgeDep) -> GetAudioInputsResult:
     return await _invoke(bridge, "getAudioInputs")
@@ -505,7 +484,6 @@ async def get_audio_inputs(bridge: BridgeDep) -> GetAudioInputsResult:
     "/set-audio-input",
     response_model=SetAudioInputResult,
     tags=["audio"],
-    summary="Choose the audio input device.",
 )
 async def set_audio_input(body: SetAudioInputRequest, bridge: BridgeDep) -> SetAudioInputResult:
     return await _invoke(bridge, "setAudioInput", body)
@@ -515,7 +493,6 @@ async def set_audio_input(body: SetAudioInputRequest, bridge: BridgeDep) -> SetA
     "/start-audio-recording",
     response_model=AudioRecordingResult,
     tags=["audio"],
-    summary="Start recording the input.",
 )
 async def start_audio_recording(bridge: BridgeDep) -> AudioRecordingResult:
     return await _invoke(bridge, "startAudioRecording")
@@ -525,7 +502,6 @@ async def start_audio_recording(bridge: BridgeDep) -> AudioRecordingResult:
     "/stop-audio-recording",
     response_model=AudioRecordingResult,
     tags=["audio"],
-    summary="Stop recording the input.",
 )
 async def stop_audio_recording(bridge: BridgeDep) -> AudioRecordingResult:
     return await _invoke(bridge, "stopAudioRecording")
@@ -540,7 +516,6 @@ async def stop_audio_recording(bridge: BridgeDep) -> AudioRecordingResult:
     "/start-render",
     response_model=StartRenderResult,
     tags=["render"],
-    summary="Export the pinned output to video.",
 )
 async def start_render(
     body: StartRenderRequest,
@@ -559,7 +534,6 @@ async def start_render(
     "/render-status",
     response_model=RenderStatusResult,
     tags=["render"],
-    summary="Poll export progress.",
 )
 async def get_render_status(bridge: BridgeDep) -> RenderStatusResult:
     return await _invoke(bridge, "getRenderStatus")
@@ -569,7 +543,6 @@ async def get_render_status(bridge: BridgeDep) -> RenderStatusResult:
     "/cancel-render",
     response_model=CancelRenderResult,
     tags=["render"],
-    summary="Stop an export.",
 )
 async def cancel_render(bridge: BridgeDep) -> CancelRenderResult:
     return await _invoke(bridge, "cancelRender")
@@ -584,7 +557,6 @@ async def cancel_render(bridge: BridgeDep) -> CancelRenderResult:
     "/screenshot",
     response_model=ScreenshotResponse,
     tags=["capture"],
-    summary="Capture the output texture or the whole editor UI.",
     responses={
         200: {
             "description": "Metadata, or image bytes when inline is requested.",
@@ -615,7 +587,6 @@ async def screenshot(
     "/screenshot-window",
     response_model=ScreenshotResponse,
     tags=["capture"],
-    summary="Capture the editor window, optionally cropped to the graph.",
     responses={
         200: {
             "description": "Metadata, or image bytes when inline is requested.",
