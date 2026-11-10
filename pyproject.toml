@@ -41,7 +41,6 @@ dependencies = [
 
 [project.scripts]
 pytixl-ascii = "pytixl.cli:run"
-pytixl = "pytixl.cli:run"
 pytixl-api = "pytixl.api.cli:run"
 
 [dependency-groups]
