@@ -1,8 +1,7 @@
-"""Optional FastAPI bridge over TiXL's debug port.
+"""FastAPI bridge over TiXL's debug port.
 
-The package is only importable when the ``api`` extra is installed:
+Start the server with:
 
-    uv sync --extra api
     pytixl-api --tixl-port 9042
 """
 

@@ -209,11 +209,10 @@ python examples/03_two_variants.py
 
 ## HTTP API
 
-The optional `api` extra exposes the debug bridge as a typed HTTP service with
+The HTTP API exposes the debug bridge as a typed HTTP service with
 Swagger UI. It attaches to an already-running editor; it never launches TiXL.
 
 ```bash
-uv sync --extra api
 pytixl-api --tixl-port 9042            # http://127.0.0.1:8787/docs
 ```
 
