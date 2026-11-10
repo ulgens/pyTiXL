@@ -34,7 +34,7 @@ dependencies = [
     # Earliest version with Python 3.15 support
     "pydantic>=2.14.0",
     # No 3.15 support, pushing for the latest release for now.
-    "typer==0.29.0",
+    "typer>=0.29.0",
     # No 3.15 support, pushing for the latest release for now.
     "uvicorn[standard]>=0.54.0",
 ]
