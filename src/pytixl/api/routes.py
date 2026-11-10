@@ -135,7 +135,7 @@ async def _invoke(
 
 
 @router.post("/ping", response_model=EmptyResult, tags=["system"])
-async def ping(bridge: BridgeDep) -> EmptyResult:
+async def ping(bridge: BridgeDep):
     return await _invoke(bridge, "ping")
 
 
@@ -144,22 +144,22 @@ async def ping(bridge: BridgeDep) -> EmptyResult:
     response_model=SetAgentStateResult,
     tags=["system"],
 )
-async def set_agent_state(body: SetAgentStateRequest, bridge: BridgeDep) -> SetAgentStateResult:
+async def set_agent_state(body: SetAgentStateRequest, bridge: BridgeDep):
     return await _invoke(bridge, "setAgentState", body)
 
 
 @router.get("/version", response_model=GetVersionResult, tags=["system"])
-async def get_version(bridge: BridgeDep) -> GetVersionResult:
+async def get_version(bridge: BridgeDep):
     return await _invoke(bridge, "getVersion")
 
 
 @router.get("/paths", response_model=GetPathsResult, tags=["system"])
-async def get_paths(bridge: BridgeDep) -> GetPathsResult:
+async def get_paths(bridge: BridgeDep):
     return await _invoke(bridge, "getPaths")
 
 
 @router.post("/shutdown", response_model=EmptyResult, tags=["system"])
-async def shutdown(bridge: BridgeDep) -> EmptyResult:
+async def shutdown(bridge: BridgeDep):
     return await _invoke(bridge, "shutdown")
 
 
@@ -168,7 +168,7 @@ async def shutdown(bridge: BridgeDep) -> EmptyResult:
     response_model=GetStructureVersionResult,
     tags=["system"],
 )
-async def get_structure_version(bridge: BridgeDep) -> GetStructureVersionResult:
+async def get_structure_version(bridge: BridgeDep):
     return await _invoke(bridge, "getStructureVersion", timeout=30.0)
 
 
@@ -177,7 +177,7 @@ async def get_structure_version(bridge: BridgeDep) -> GetStructureVersionResult:
     response_model=SetVSyncResult,
     tags=["system"],
 )
-async def set_vsync(body: SetVSyncRequest, bridge: BridgeDep) -> SetVSyncResult:
+async def set_vsync(body: SetVSyncRequest, bridge: BridgeDep):
     return await _invoke(bridge, "setVSync", body)
 
 
@@ -189,7 +189,7 @@ async def set_vsync(body: SetVSyncRequest, bridge: BridgeDep) -> SetVSyncResult:
 async def set_target_frame_rate(
     body: SetTargetFrameRateRequest,
     bridge: BridgeDep,
-) -> SetTargetFrameRateResult:
+):
     return await _invoke(bridge, "setTargetFrameRate", body)
 
 
@@ -201,7 +201,7 @@ async def set_target_frame_rate(
 async def set_frame_latency(
     body: SetFrameLatencyRequest,
     bridge: BridgeDep,
-) -> SetFrameLatencyResult:
+):
     return await _invoke(bridge, "setFrameLatency", body)
 
 
@@ -218,7 +218,7 @@ async def set_frame_latency(
 async def get_log_tail(
     query: Annotated[GetLogTailRequest, Query()],
     bridge: BridgeDep,
-) -> GetLogTailResult:
+):
     return await _invoke(bridge, "getLogTail", query)
 
 
@@ -227,7 +227,7 @@ async def get_log_tail(
     response_model=GetMetricsResult,
     tags=["diagnostics"],
 )
-async def get_metrics(bridge: BridgeDep) -> GetMetricsResult:
+async def get_metrics(bridge: BridgeDep):
     return await _invoke(bridge, "getMetrics")
 
 
@@ -239,7 +239,7 @@ async def get_metrics(bridge: BridgeDep) -> GetMetricsResult:
 async def get_shader_errors(
     query: Annotated[GetShaderErrorsRequest, Query()],
     bridge: BridgeDep,
-) -> GetShaderErrorsResult:
+):
     return await _invoke(bridge, "getShaderErrors", query)
 
 
@@ -248,7 +248,7 @@ async def get_shader_errors(
     response_model=GetFrameSamplesResult,
     tags=["diagnostics"],
 )
-async def get_frame_samples(bridge: BridgeDep) -> GetFrameSamplesResult:
+async def get_frame_samples(bridge: BridgeDep):
     return await _invoke(bridge, "getFrameSamples")
 
 
@@ -257,7 +257,7 @@ async def get_frame_samples(bridge: BridgeDep) -> GetFrameSamplesResult:
     response_model=EmptyResult,
     tags=["diagnostics"],
 )
-async def stall_main_thread(body: StallMainThreadRequest, bridge: BridgeDep) -> EmptyResult:
+async def stall_main_thread(body: StallMainThreadRequest, bridge: BridgeDep):
     return await _invoke(bridge, "stallMainThread", body, timeout=body.seconds + 60.0)
 
 
@@ -266,7 +266,7 @@ async def stall_main_thread(body: StallMainThreadRequest, bridge: BridgeDep) -> 
     response_model=EmptyResult,
     tags=["diagnostics"],
 )
-async def release_gpu_resources(bridge: BridgeDep) -> EmptyResult:
+async def release_gpu_resources(bridge: BridgeDep):
     return await _invoke(bridge, "releaseGpuResources")
 
 
@@ -276,7 +276,7 @@ async def release_gpu_resources(bridge: BridgeDep) -> EmptyResult:
 
 
 @router.get("/context", response_model=GetContextResult, tags=["graph"])
-async def get_context(bridge: BridgeDep) -> GetContextResult:
+async def get_context(bridge: BridgeDep):
     return await _invoke(bridge, "getContext")
 
 
@@ -288,17 +288,17 @@ async def get_context(bridge: BridgeDep) -> GetContextResult:
 async def get_graph_state(
     query: Annotated[GetGraphStateRequest, Query()],
     bridge: BridgeDep,
-) -> GetGraphStateResult:
+):
     return await _invoke(bridge, "getGraphState", query)
 
 
 @router.post("/select", response_model=SelectResult, tags=["graph"])
-async def select(body: SelectRequest, bridge: BridgeDep) -> SelectResult:
+async def select(body: SelectRequest, bridge: BridgeDep):
     return await _invoke(bridge, "select", body)
 
 
 @router.get("/graph-view", response_model=GraphView, tags=["graph"])
-async def get_graph_view(bridge: BridgeDep) -> GraphView:
+async def get_graph_view(bridge: BridgeDep):
     return await _invoke(bridge, "getGraphView")
 
 
@@ -307,7 +307,7 @@ async def get_graph_view(bridge: BridgeDep) -> GraphView:
     response_model=SetGraphViewResult,
     tags=["graph"],
 )
-async def set_graph_view(body: SetGraphViewRequest, bridge: BridgeDep) -> SetGraphViewResult:
+async def set_graph_view(body: SetGraphViewRequest, bridge: BridgeDep):
     return await _invoke(bridge, "setGraphView", body)
 
 
@@ -319,12 +319,12 @@ async def set_graph_view(body: SetGraphViewRequest, bridge: BridgeDep) -> SetGra
 async def focus_graph_view(
     body: FocusGraphViewRequest,
     bridge: BridgeDep,
-) -> FocusGraphViewResult:
+):
     return await _invoke(bridge, "focusGraphView", body)
 
 
 @router.post("/set-input", response_model=SetInputResult, tags=["graph"])
-async def set_input(body: SetInputRequest, bridge: BridgeDep) -> SetInputResult:
+async def set_input(body: SetInputRequest, bridge: BridgeDep):
     return await _invoke(bridge, "setInput", body)
 
 
@@ -332,22 +332,22 @@ async def set_input(body: SetInputRequest, bridge: BridgeDep) -> SetInputResult:
 async def get_output(
     query: Annotated[GetOutputRequest, Query()],
     bridge: BridgeDep,
-) -> GetOutputResult:
+):
     return await _invoke(bridge, "getOutput", query)
 
 
 @router.post("/pump-frames", response_model=EmptyResult, tags=["graph"])
-async def pump_frames(body: PumpFramesRequest | None = None, *, bridge: BridgeDep) -> EmptyResult:
+async def pump_frames(body: PumpFramesRequest | None = None, *, bridge: BridgeDep):
     return await _invoke(bridge, "pumpFrames", body)
 
 
 @router.post("/add-op", response_model=AddOpResult, tags=["graph"])
-async def add_op(body: AddOpRequest, bridge: BridgeDep) -> AddOpResult:
+async def add_op(body: AddOpRequest, bridge: BridgeDep):
     return await _invoke(bridge, "addOp", body)
 
 
 @router.post("/connect", response_model=EmptyResult, tags=["graph"])
-async def connect(body: ConnectRequest, bridge: BridgeDep) -> EmptyResult:
+async def connect(body: ConnectRequest, bridge: BridgeDep):
     return await _invoke(bridge, "connect", body)
 
 
@@ -355,22 +355,22 @@ async def connect(body: ConnectRequest, bridge: BridgeDep) -> EmptyResult:
 async def delete_op(
     query: Annotated[DeleteOpRequest, Query()],
     bridge: BridgeDep,
-) -> EmptyResult:
+):
     return await _invoke(bridge, "deleteOp", query)
 
 
 @router.post("/pin", response_model=EmptyResult, tags=["graph"])
-async def pin(body: PinRequest, bridge: BridgeDep) -> EmptyResult:
+async def pin(body: PinRequest, bridge: BridgeDep):
     return await _invoke(bridge, "pin", body)
 
 
 @router.post("/set-bypass", response_model=SetBypassResult, tags=["graph"])
-async def set_bypass(body: SetBypassRequest, bridge: BridgeDep) -> SetBypassResult:
+async def set_bypass(body: SetBypassRequest, bridge: BridgeDep):
     return await _invoke(bridge, "setBypass", body)
 
 
 @router.post("/reset-view", response_model=EmptyResult, tags=["graph"])
-async def reset_view(bridge: BridgeDep) -> EmptyResult:
+async def reset_view(bridge: BridgeDep):
     return await _invoke(bridge, "resetView")
 
 
@@ -379,7 +379,7 @@ async def reset_view(bridge: BridgeDep) -> EmptyResult:
     response_model=LayoutSelectionResult,
     tags=["graph"],
 )
-async def layout_selection(bridge: BridgeDep) -> LayoutSelectionResult:
+async def layout_selection(bridge: BridgeDep):
     return await _invoke(bridge, "layoutSelection")
 
 
@@ -391,17 +391,17 @@ async def layout_selection(bridge: BridgeDep) -> LayoutSelectionResult:
 async def delete_selection(
     query: Annotated[DeleteSelectionRequest, Query()],
     bridge: BridgeDep,
-) -> DeleteSelectionResult:
+):
     return await _invoke(bridge, "deleteSelection", query)
 
 
 @router.post("/undo", response_model=UndoRedoResult, tags=["graph"])
-async def undo(bridge: BridgeDep) -> UndoRedoResult:
+async def undo(bridge: BridgeDep):
     return await _invoke(bridge, "undo")
 
 
 @router.post("/redo", response_model=UndoRedoResult, tags=["graph"])
-async def redo(bridge: BridgeDep) -> UndoRedoResult:
+async def redo(bridge: BridgeDep):
     return await _invoke(bridge, "redo")
 
 
@@ -415,7 +415,7 @@ async def redo(bridge: BridgeDep) -> UndoRedoResult:
     response_model=OpenProjectResult,
     tags=["project"],
 )
-async def open_project(body: OpenProjectRequest, bridge: BridgeDep) -> OpenProjectResult:
+async def open_project(body: OpenProjectRequest, bridge: BridgeDep):
     return await _invoke(bridge, "openProject", body)
 
 
@@ -424,17 +424,17 @@ async def open_project(body: OpenProjectRequest, bridge: BridgeDep) -> OpenProje
     response_model=NewProjectResult,
     tags=["project"],
 )
-async def new_project(body: NewProjectRequest, bridge: BridgeDep) -> NewProjectResult:
+async def new_project(body: NewProjectRequest, bridge: BridgeDep):
     return await _invoke(bridge, "newProject", body)
 
 
 @router.post("/reload", response_model=ReloadResult, tags=["project"])
-async def reload_project(body: ReloadRequest, bridge: BridgeDep) -> ReloadResult:
+async def reload_project(body: ReloadRequest, bridge: BridgeDep):
     return await _invoke(bridge, "reload", body)
 
 
 @router.post("/open-window", response_model=OpenWindowResult, tags=["project"])
-async def open_window(body: OpenWindowRequest, bridge: BridgeDep) -> OpenWindowResult:
+async def open_window(body: OpenWindowRequest, bridge: BridgeDep):
     return await _invoke(bridge, "openWindow", body)
 
 
@@ -443,7 +443,7 @@ async def open_window(body: OpenWindowRequest, bridge: BridgeDep) -> OpenWindowR
     response_model=EmptyResult,
     tags=["project"],
 )
-async def output_setup(body: OutputSetupRequest, bridge: BridgeDep) -> EmptyResult:
+async def output_setup(body: OutputSetupRequest, bridge: BridgeDep):
     return await _invoke(bridge, "outputSetup", body)
 
 
@@ -453,7 +453,7 @@ async def output_setup(body: OutputSetupRequest, bridge: BridgeDep) -> EmptyResu
 
 
 @router.post("/set-time", response_model=SetTimeResult, tags=["playback"])
-async def set_time(body: SetTimeRequest, bridge: BridgeDep) -> SetTimeResult:
+async def set_time(body: SetTimeRequest, bridge: BridgeDep):
     return await _invoke(bridge, "setTime", body)
 
 
@@ -462,7 +462,7 @@ async def set_time(body: SetTimeRequest, bridge: BridgeDep) -> SetTimeResult:
     response_model=SetPlaybackResult,
     tags=["playback"],
 )
-async def set_playback(body: SetPlaybackRequest, bridge: BridgeDep) -> SetPlaybackResult:
+async def set_playback(body: SetPlaybackRequest, bridge: BridgeDep):
     return await _invoke(bridge, "setPlayback", body)
 
 
@@ -476,7 +476,7 @@ async def set_playback(body: SetPlaybackRequest, bridge: BridgeDep) -> SetPlayba
     response_model=GetAudioInputsResult,
     tags=["audio"],
 )
-async def get_audio_inputs(bridge: BridgeDep) -> GetAudioInputsResult:
+async def get_audio_inputs(bridge: BridgeDep):
     return await _invoke(bridge, "getAudioInputs")
 
 
@@ -485,7 +485,7 @@ async def get_audio_inputs(bridge: BridgeDep) -> GetAudioInputsResult:
     response_model=SetAudioInputResult,
     tags=["audio"],
 )
-async def set_audio_input(body: SetAudioInputRequest, bridge: BridgeDep) -> SetAudioInputResult:
+async def set_audio_input(body: SetAudioInputRequest, bridge: BridgeDep):
     return await _invoke(bridge, "setAudioInput", body)
 
 
@@ -494,7 +494,7 @@ async def set_audio_input(body: SetAudioInputRequest, bridge: BridgeDep) -> SetA
     response_model=AudioRecordingResult,
     tags=["audio"],
 )
-async def start_audio_recording(bridge: BridgeDep) -> AudioRecordingResult:
+async def start_audio_recording(bridge: BridgeDep):
     return await _invoke(bridge, "startAudioRecording")
 
 
@@ -503,7 +503,7 @@ async def start_audio_recording(bridge: BridgeDep) -> AudioRecordingResult:
     response_model=AudioRecordingResult,
     tags=["audio"],
 )
-async def stop_audio_recording(bridge: BridgeDep) -> AudioRecordingResult:
+async def stop_audio_recording(bridge: BridgeDep):
     return await _invoke(bridge, "stopAudioRecording")
 
 
@@ -521,7 +521,7 @@ async def start_render(
     body: StartRenderRequest,
     bridge: BridgeDep,
     captures_dir: CapturesDep,
-) -> StartRenderResult:
+):
     render_path = Path(body.path).expanduser()
     if not render_path.is_absolute():
         render_path = captures_dir / render_path
@@ -535,7 +535,7 @@ async def start_render(
     response_model=RenderStatusResult,
     tags=["render"],
 )
-async def get_render_status(bridge: BridgeDep) -> RenderStatusResult:
+async def get_render_status(bridge: BridgeDep):
     return await _invoke(bridge, "getRenderStatus")
 
 
@@ -544,7 +544,7 @@ async def get_render_status(bridge: BridgeDep) -> RenderStatusResult:
     response_model=CancelRenderResult,
     tags=["render"],
 )
-async def cancel_render(bridge: BridgeDep) -> CancelRenderResult:
+async def cancel_render(bridge: BridgeDep):
     return await _invoke(bridge, "cancelRender")
 
 
