@@ -4,7 +4,9 @@ from pathlib import Path
 from typing import Annotated
 
 import typer
+import uvicorn
 
+from pytixl.api.app import create_app
 from pytixl.api.settings import ApiSettings
 
 app = typer.Typer(add_completion=False, no_args_is_help=True, help="Serve the typed TiXL bridge API.")
@@ -28,16 +30,6 @@ def serve(
     log_level: Annotated[str, typer.Option(help="uvicorn log level.")] = "info",
 ) -> None:
     """Attach to a running TiXL editor and expose it over HTTP with Swagger UI."""
-    try:
-        import uvicorn
-
-        from pytixl.api.app import create_app
-    except ImportError as exc:
-        typer.echo(
-            "The API extra is not installed. Run: uv sync --extra api",
-            err=True,
-        )
-        raise typer.Exit(code=1) from exc
 
     settings = ApiSettings(
         host=host,
